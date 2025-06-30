@@ -2,7 +2,7 @@ name: Deploy EN Application
 
 on:
   repository_dispatch:
-    types: [deploy-FE]
+    types: [deploy-FR]
 
 jobs:
   deploy:
