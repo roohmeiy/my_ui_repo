@@ -2,7 +2,7 @@ name: Deploy FR Application
 
 on:
   repository_dispatch:
-    types: [deploy-fr]
+    types: [deploy-FR]
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18  # You can adjust this version as needed
+          node-version: 18  
 
       - name: Install dependencies
         run: npm install
