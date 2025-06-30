@@ -9,18 +9,13 @@ on:
         required: false
         default: 'FR'
 
-env:
-  REPO_B: 'roohmeiy/multi-branch-management'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: ${{ env.REPO_B }}
-          ref: ${{ github.event.inputs.source_branch }}
-          token: ${{ secrets.TOKEN }}
+          ref: ${{ github.event.inputs.source_branch || 'FR' }}
           
       - uses: actions/setup-node@v4
         with:
