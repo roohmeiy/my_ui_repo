@@ -1,26 +1,24 @@
-name: EN Deployment
+name: Deploy EN Application
 
 on:
-  workflow_dispatch:
-    inputs:
-      triggered_by:
-        required: false
-      source_branch:
-        required: false
-        default: 'EN'
+  repository_dispatch:
+    types: [deploy-EN]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          ref: ${{ github.event.inputs.source_branch || 'EN' }}
-          
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-          
-      - run: npm ci
-      - run: npm start
+          node-version: 18 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run application
+        run: npm run start
