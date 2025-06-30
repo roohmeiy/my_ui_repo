@@ -7,8 +7,10 @@ on:
         required: false
       source_branch:
         required: false
-      commit_hash:
-        required: false
+        default: 'EN'
+
+env:
+  REPO_B: 'roohmeiy/multi-branch-management'
 
 jobs:
   deploy:
@@ -16,13 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: EN
-
+          repository: ${{ env.REPO_B }}
+          ref: ${{ github.event.inputs.source_branch }}
+          token: ${{ secrets.TOKEN }}
+          
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
-
+          
       - run: npm ci
-
       - run: npm start
