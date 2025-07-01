@@ -1,4 +1,4 @@
-name: EN Deployment
+name: FR Deployment
 
 on:
   repository_dispatch:
