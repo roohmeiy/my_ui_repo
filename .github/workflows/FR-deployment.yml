@@ -1,26 +1,24 @@
-name: FR Deployment
+name: EN Deployment
 
 on:
-  workflow_dispatch:
-    inputs:
-      triggered_by:
-        required: false
-      source_branch:
-        required: false
-        default: 'FR'
+  repository_dispatch:
+    types: [deploy-FR]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout FR branch
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.source_branch || 'FR' }}
-          
-      - uses: actions/setup-node@v4
+          ref: FR  
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
-          
+
       - run: npm ci
       - run: npm start
